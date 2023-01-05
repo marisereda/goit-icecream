@@ -3,7 +3,7 @@
 The **Ice Cream** project is a landing website sample, developed using HTML,
 SCSS.
 
-The project demonstrates the use of responsive design, and CSS animation effects.
+The project demonstrates the use of responsive design and CSS animation effects.
 
 ## There were used:
 
