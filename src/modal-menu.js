@@ -1,7 +1,11 @@
+import throttle from 'lodash.throttle';
+
 (() => {
   // === Header animation start ===
   const headerSection = document.querySelector('.header');
   const heroSection = document.querySelector('.hero');
+  const throttledScrollHandlerDesktop = throttle(scrollHandlerDesktop, 300);
+  const throttledScrollHandlerMobile = throttle(scrollHandlerMobile, 300);
 
   let previousPosition = 0;
 
@@ -9,18 +13,18 @@
   mediaDesktop.addEventListener('change', setMenuBehaviour);
 
   if (window.screen.width >= 1200) {
-    window.addEventListener('scroll', scrollHandlerDesktop);
+    window.addEventListener('scroll', throttledScrollHandlerDesktop);
   } else {
-    window.addEventListener('scroll', scrollHandlerMobile);
+    window.addEventListener('scroll', throttledScrollHandlerMobile);
   }
 
   function setMenuBehaviour(event) {
     if (event.matches === true) {
-      window.removeEventListener('scroll', scrollHandlerMobile);
-      window.addEventListener('scroll', scrollHandlerDesktop);
+      window.removeEventListener('scroll', throttledScrollHandlerMobile);
+      window.addEventListener('scroll', throttledScrollHandlerDesktop);
     } else {
-      window.removeEventListener('scroll', scrollHandlerDesktop);
-      window.addEventListener('scroll', scrollHandlerMobile);
+      window.removeEventListener('scroll', throttledScrollHandlerDesktop);
+      window.addEventListener('scroll', throttledScrollHandlerMobile);
     }
   }
 
@@ -62,6 +66,7 @@
   }
 
   // ---- Desktop ----
+
   function scrollHandlerDesktop() {
     const scrollPosition = scrollY;
     const headerHeight = headerSection.offsetHeight;
